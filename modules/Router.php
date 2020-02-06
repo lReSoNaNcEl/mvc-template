@@ -7,7 +7,8 @@ class Router {
 
     private static $routes = [
         '/' => 'main/index',
-        '/signup' => 'main/signup'
+        '/signup' => 'main/signup',
+        '/contacts' => 'main/contacts',
     ];
 
     public static function getRoutes() {
@@ -20,22 +21,26 @@ class Router {
     }
 
     public static function run() {
+        require ROOT."/controllers/MainController.php";
+
         $uri = self::getURI();
         $routes = self::$routes;
-        $controllerName = 'MainController';
-        $action = '';
+        $currentPath = '';
 
-        require "{$_SERVER['DOCUMENT_ROOT']}/controllers/{$controllerName}.php";
+        $controller = new MainController();
 
-        foreach ($routes as $route => $controller) {
-            $controllerName = ucfirst(explode('/', $controller)[0]) .'Controller';
-            $action = explode('/', $controller)[1];
+        foreach ($routes as $route => $action) {
+            $controllerName = ucfirst(explode('/', $action)[0]) .'Controller';
+            $action = explode('/', $action)[1];
 
             if ($uri === $route || $uri === "{$route}/") {
-                $controller = new MainController();
+                $currentPath = $route;
                 $controller->$action();
             }
         }
+
+        if ($uri !== $currentPath && $uri !== "{$currentPath}/")
+            $controller->error();
     }
 
 }

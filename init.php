@@ -8,5 +8,5 @@ $modules = [
 ];
 
 foreach ($modules as $module) {
-    require("{$ROOT}/modules/{$module}.php");
+    require(ROOT."/modules/{$module}.php");
 }

@@ -16,4 +16,18 @@ class MainController extends Controller {
             'title' => 'Signup Page',
         ]);
     }
+
+    public function contacts() {
+
+        parent::render('contacts', [
+            'title' => 'Contacts',
+        ]);
+    }
+
+    public function error() {
+
+        parent::render('error', [
+            'title' => '404 Not Found',
+        ]);
+    }
 }
