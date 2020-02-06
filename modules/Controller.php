@@ -7,16 +7,13 @@ class Controller {
 
     public function render($view, $data = null) {
 
+        App::includeMetaData($data);
+
         if ($view !== 'error') {
-            require(ROOT . '/components/MetaData.php');
-            App::includeStyles();
-            require(ROOT . '/components/Header.php');
-            require(ROOT . "/views/{$view}/{$view}.php");
-            require(ROOT . '/components/Footer.php');
+            App::includeStyles($view);
+            App::renderTemplate('default', $view);
         }
-        else {
-            require(ROOT . '/components/MetaData.php');
-            require(ROOT . "/views/{$view}/{$view}.php");
-        }
+        else
+            App::renderTemplate('error', $view);
     }
 }

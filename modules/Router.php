@@ -15,7 +15,6 @@ class Router {
         return self::$routes;
     }
 
-
     public static function getURI() {
         return $_SERVER['REQUEST_URI'];
     }
@@ -26,7 +25,6 @@ class Router {
         $uri = self::getURI();
         $routes = self::$routes;
         $currentPath = '';
-
         $controller = new MainController();
 
         foreach ($routes as $route => $action) {

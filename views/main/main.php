@@ -1,7 +1,3 @@
-
-    <?php
-
-        foreach ($data as $key => $value) {
-            echo $key;
-        }
-    ?>
+<main class="content">
+    <h1>Index Page</h1>
+</main>
